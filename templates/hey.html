@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block montitre %}
+debut de mes mots: bienvenue dans amazon hub
+{% endblock %}
+{% block content %}
+<h1># amazon-hub</h1>
+{% for x in users | reverse %}
+ <li>{{ x["first_name"]  }}</li>
+
+{% endfor %} 
+fin de mes mots : amuse oti bien
+{% endblock %}
+{% block liens %}
+<a href="/">welcome</a>
+{% endblock %}
