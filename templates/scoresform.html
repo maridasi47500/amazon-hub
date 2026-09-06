@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefieldscoresuser_id">user_id</label><input type="text" id="somefieldscoresuser_id" name="user_id"/></div>
+<div class="field"><label for="somefieldscorestime_signature">time_signature</label><input type="text" id="somefieldscorestime_signature" name="time_signature"/></div>
+<div class="field"><label for="somefieldscoreskey_signature">key_signature</label><input type="text" id="somefieldscoreskey_signature" name="key_signature"/></div>
+<div class="field"><label for="somefieldscoresmytext">mytext</label><input type="textarea" id="somefieldscoresmytext" name="mytext"/></div>
+<div class="field"><label for="somefieldscorespic">pic</label><input type="text" id="somefieldscorespic" name="pic"/></div><div class="actions"><input type="submit"/></div></form>{% for x in scoress %}{{x["user_id"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_scores"> add one scores</a>{% endblock %}

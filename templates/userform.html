@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefielduserusername">username</label><input type="text" id="somefielduserusername" name="username"/></div>
+<div class="field"><label for="somefielduserpassword">password</label><input type="password" id="somefielduserpassword" name="password"/></div>
+<div class="field"><label for="somefielduseremail">email</label><input type="email" id="somefielduseremail" name="email"/></div>
+<div class="field"><label for="somefielduserphone">phone</label><input type="telephone" id="somefielduserphone" name="phone"/></div>
+<div class="field"><label for="somefieldcountry_id">country_id</label><select id="somefieldcountry_id" name="country_id"><option value="novalue">no value</option>
+{% for somecountry in touslescountry %}
+<option value="{{ somecountry['id'] }}">{{ somecountry['name'] }}</option>{% endfor %}
+</select></div>
+<div class="field"><label for="somefielduserpic">pic</label><input type="file" id="somefielduserpic" name="pic"/></div><div class="actions"><input type="submit"/></div></form>{% for x in users %}{{x["username"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_user"> add one user</a>{% endblock %}

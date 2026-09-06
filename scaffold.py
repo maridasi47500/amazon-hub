@@ -5,7 +5,8 @@ import os
 print(sys.argv[1])
 
 
-filename=sys.argv[1].lower() myclass=(filename).capitalize()
+filename=sys.argv[1].lower() 
+myclass=(filename).capitalize()
 modelname=(filename).capitalize()
 marouteget="\"/%s\"" % filename
 maroutenew="\"/%s_new\"" % filename

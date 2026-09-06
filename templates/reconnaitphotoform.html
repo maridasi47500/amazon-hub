@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefielduser_id">user_id</label><select id="somefielduser_id" name="user_id"><option value="novalue">no value</option>
+{% for someuser in touslesuser %}
+<option value="{{ someuser['id'] }}">{{ someuser['name'] }}</option>{% endfor %}
+</select></div>
+<div class="field"><label for="somefieldreconnaitphotouser_id">user_id</label><input type="text" id="somefieldreconnaitphotouser_id" name="user_id"/></div>
+<div class="field"><label for="somefieldreconnaitphotopic">pic</label><input type="file" id="somefieldreconnaitphotopic" name="pic"/></div>
+<div class="field"><label for="somefieldreconnaitphotoface_recognized">face_recognized</label><input type="text" id="somefieldreconnaitphotoface_recognized" name="face_recognized"/></div><div class="actions"><input type="submit"/></div></form>{% for x in reconnaitphotos %}{{x["user_id"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_reconnaitphoto"> add one reconnaitphoto</a>{% endblock %}

@@ -26,3 +26,40 @@ INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '1', 'anonyme', 'noname', 'anonymous@email.fr', '+2653546434');
 INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '2', 'anne onim', 'onim', 'anne.onim@email.com', '+86877779898');
+create table if not exists user(
+        id integer primary key autoincrement,
+        username text,
+            password text,
+            email text,
+            phone text,
+            country_id text,
+            pic text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
+create table if not exists country(
+        id integer primary key autoincrement,
+        name text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
+create table if not exists scores(
+        id integer primary key autoincrement,
+        user_id text,
+            time_signature text,
+            key_signature text,
+            mytext text,
+            pic text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
+create table if not exists mysunglassesphoto(
+        id integer primary key autoincrement,
+        pic text,
+            user_id text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
+create table if not exists maquillephoto(
+        id integer primary key autoincrement,
+        pic text,
+            user_id text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
+create table if not exists reconnaitphoto(
+        id integer primary key autoincrement,
+        user_id text,
+            pic text,
+            face_recognized text
+      , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
