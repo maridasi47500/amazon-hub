@@ -1,6 +1,6 @@
 import face_recognition
 class FaceRecognize():
-    def __init__(self, known, unknown)
+    def __init__(self, known, unknown):
 
         unknown_image = face_recognition.load_image_file("./static/photos/"+unknown)
         self.unknown_encoding = face_recognition.face_encodings(unknown_image)[0]

@@ -171,7 +171,7 @@ def add_one_mysunglassesphoto():
 
         hey["pic"]=uploaded_file.filename
         try:
-            x=subprocess.Popen(["/usr/bin/python3.8","addsunglasses.py",hey["paramname"]])
+            x=subprocess.Popen(["/usr/bin/python3.8","addsunglasses.py",hey["pic"]])
         except Exception as e:
             print("ereeeuuuuur!!! ooowow!",e)
 
