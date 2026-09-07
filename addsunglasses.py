@@ -65,7 +65,7 @@ def hellomain(mypic):
     # Replace the ROI in the original image with the sunglass overlay
     image[face_coords[1]:face_coords[1]+face_height, face_coords[0]:face_coords[0]+face_width] = overlay
 
-    print(image_path)
+    #print(image_path)
     cv2.imwrite(image_path, image)
 #cv2.imwrite(path,img_to_save)
 
@@ -75,6 +75,6 @@ def hellomain(mypic):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    print("./static/photos/"+argv[1])
-    print(os.path.join("./static/photos",argv[1]))
+    #print("./static/photos/"+argv[1])
+    #print(os.path.join("./static/photos",argv[1]))
     hellomain("./static/photos/"+argv[1])

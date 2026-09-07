@@ -11,7 +11,7 @@ class Maquille():
     def find_landmarks(self):
         face_landmarks_list = face_recognition.face_landmarks(self.image)
         
-        pil_image = Image.fromarray(image)
+        pil_image = Image.fromarray(self.image)
         for face_landmarks in face_landmarks_list:
             d = ImageDraw.Draw(pil_image, 'RGBA')
         

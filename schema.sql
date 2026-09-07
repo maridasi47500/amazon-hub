@@ -50,7 +50,8 @@ create table if not exists scores(
 create table if not exists mysunglassesphoto(
         id integer primary key autoincrement,
         pic text,
-            user_id text
+            user_id text,
+            mycomment text
       , created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP                );
 create table if not exists maquillephoto(
         id integer primary key autoincrement,

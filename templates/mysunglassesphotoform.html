@@ -1,3 +1,19 @@
 {% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
 <div class="field"><label for="somefieldmysunglassesphotopic">pic</label><input type="file" id="somefieldmysunglassesphotopic" name="pic"/></div>
-<div class="field"><label for="somefieldmysunglassesphotouser_id">user_id</label><input type="text" id="somefieldmysunglassesphotouser_id" name="user_id"/></div><div class="actions"><input type="submit"/></div></form>{% for x in mysunglassesphotos %}{{x["pic"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_mysunglassesphoto"> add one mysunglassesphoto</a>{% endblock %}
+<div class="field"><label for="somefieldmysunglassesphotouser_id">user_id</label><input type="text" id="somefieldmysunglassesphotouser_id" name="user_id"/></div><div class="actions"><input type="submit"/></div></form>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+{% for x in mysunglassesphotos %}
+
+  <div class="col" style="max-width:300px;">
+    <div class="card">
+      <img src="/static/photos/{{x["pic"] }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+	<p class="card-text">{{x["mycomment"]}}</p>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_mysunglassesphoto"> add one mysunglassesphoto</a>{% endblock %}

@@ -1,12 +1,17 @@
 # amazon-hub
 - Arriver dans un hub d'aérogare ou un logement hub avec facial recognition, partitions de musique, gps, lunettes de soleil sur photos ou maquillage
-- sudo apt install libbrotli-dev
+![alt text](hub1.png)
+![alt text](hub2.png)
+![alt text](hub3.png)
+![alt text](hub4.png)
+
+- (sudo apt install libbrotli-dev
 - trouver libjxl
 - pip install --upgrade pip setuptools wheel
 - python3.9 -m pip install --upgrade pip setuptools wheel testresources
 - pip install p5py
 - pip install PEP517
-- python3.9 -m pip install dlib cmake
+- python3.9 -m pip install dlib cmake)
 - 
 - Installation
 - Python 3 / Python 2 are fully supported. Only macOS and
@@ -38,3 +43,4 @@
 
 - export CMAKE_POLICY_VERSION_MINIMUM=3.5
 
+- pip install opencv-python

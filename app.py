@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, session, redirect
 from digital_makeup import Maquille
 from face_recognize import FaceRecognize
+import random
+import string
+from subprocess import check_output
 from myplace import Myplace
 from bs4 import BeautifulSoup
 import subprocess
@@ -164,19 +167,27 @@ def add_one_mysunglassesphoto():
         hey=dict(request.form)
 
         uploaded_file = request.files['pic']
+
+
+        char_set = string.ascii_uppercase + string.digits
+        myfilename=''.join(random.sample(char_set*6, 6))+'.'+uploaded_file.filename.split('.')[-1]
         if uploaded_file.filename != '':
-            uploaded_file.save(os.path.join('static/photos', uploaded_file.filename))
+            uploaded_file.save(os.path.join('static/photos', myfilename))
 
 
 
-        hey["pic"]=uploaded_file.filename
+        hey["pic"]=myfilename
         try:
-            x=subprocess.Popen(["/usr/bin/python3.8","addsunglasses.py",hey["pic"]])
+            #x=subprocess.Popen(["/usr/bin/python3","addsunglasses.py",hey["pic"]])
+            x=subprocess.check_output(["/home/mary/miniconda3/bin/python3","addsunglasses.py",hey["pic"]])
+
+            print("no error:",x)
+            hey["mycomment"]=x
         except Exception as e:
             print("ereeeuuuuur!!! ooowow!",e)
 
 
-        one_user = query_db("insert into mysunglassesphoto (pic,user_id) values (:pic,:user_id)",hey, one=True)
+        one_user = query_db("insert into mysunglassesphoto (pic,user_id,mycomment) values (:pic,:user_id,:mycomment)",hey, one=True)
         mylastrowid=str(one_user["myid"])
         user = query_db('select * from mysunglassesphoto')
 
@@ -218,11 +229,13 @@ def add_one_maquillephoto():
 
 @app.route("/add_one_reconnaitphoto", methods=["GET","POST"])
 def add_one_reconnaitphoto():
+    touslesuser= query_db("select * from user")
 
     if request.method == 'POST':
 
         the_username = "anonyme"
         hey=dict(request.form)
+        print(hey)
 
         uploaded_file = request.files['pic']
         if uploaded_file.filename != '':
@@ -232,28 +245,31 @@ def add_one_reconnaitphoto():
 
 
         knownpicuser= []
-        findpicuser= query_db("select x.pic from user x where id = ?", [request.form["user_id"]], one=True)
+        print(request.form["user_id"])
+        findpicuser= query_db("select x.pic from user x where x.id = ?", [request.form["user_id"]], one=True)
+        print(dict(findpicuser))
         #findpicuser= query_db("select x.pic from user x ) #optional compare photo with all users from the relational table
         #for x in findpicuser:
         #    knownpicuser.append(x["pic"])
 
-        knownpicuser.append([findpicuser["pic"]])
-        unknownpic=request.form["pic"]
+        knownpicuser.append(findpicuser["pic"])
+        unknownpic=hey["pic"]
         x=FaceRecognize(knownpicuser, unknownpic).get_results()
-        hey["recognized_face"]=str(x)
+        print("recognized", x)
+        hey["face_recognized"]="recognized" if x[0] else "not recognized"
 
 
         one_user = query_db("insert into reconnaitphoto (user_id,pic,face_recognized) values (:user_id,:pic,:face_recognized)",hey, one=True)
         mylastrowid=str(one_user["myid"])
-        user = query_db('select * from reconnaitphoto')
+        user = query_db('select x.*, username from reconnaitphoto x left join user u on u.id = x.user_id')
 
 
-        return render_template("reconnaitphotoform.html", reconnaitphotos=user, one_user=one_user, the_title="add new reconnaitphoto")
+        return render_template("reconnaitphotoform.html", touslesuser=touslesuser, reconnaitphotos=user, one_user=one_user, the_title="add new reconnaitphoto")
 
 
-    touslesuser= query_db("select * from user")
 
-    user = query_db('select * from reconnaitphoto')
+
+    user = query_db('select x.*, username from reconnaitphoto x left join user u on u.id = x.user_id')
     one_user = query_db("select * from reconnaitphoto limit 1", one=True)
-    return render_template("reconnaitphotoform.html", reconnaitphotos=user, one_user=one_user, the_title="add new reconnaitphoto")
+    return render_template("reconnaitphotoform.html", touslesuser=touslesuser,  reconnaitphotos=user, one_user=one_user, the_title="add new reconnaitphoto")
 

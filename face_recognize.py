@@ -6,7 +6,7 @@ class FaceRecognize():
         self.unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
         self.known_faces=[]
         for x in known:
-            known_image  = face_recognition.load_image_file("./static/photos/"+known)
+            known_image  = face_recognition.load_image_file("./static/photos/"+x)
             self.known_faces.append(face_recognition.face_encodings(known_image)[0])
 
 
